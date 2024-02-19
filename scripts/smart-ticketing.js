@@ -3,9 +3,16 @@ const couponApplyBtn = document.getElementById("apply");
 function appendSeatToList(seatNumber) {
   const selectedSeatCount = getTextElementValueById("selectedSeatCount");
   const seatLeft = getTextElementValueById("seat-left");
+  const selectedSeatNumber = document.getElementById(seatNumber);
+  if (selectedSeatNumber.classList.contains("bg-[#1DD100]")) {
+    return;
+  }
+
+  if (selectedSeatCount + 1 === 4) {
+    couponApplyBtn.disabled = false;
+  }
 
   if (selectedSeatCount + 1 < 2) {
-    couponApplyBtn.disabled = false;
     setTextElementValueById("selected-seat", seatNumber);
     hideElementById("no-seat-selected");
     showElementById("book-seats-list");
@@ -36,6 +43,7 @@ function appendSeatToList(seatNumber) {
     setTextElementValueById("total-price", (selectedSeatCount + 1) * 550);
     setTextElementValueById("grand-total", (selectedSeatCount + 1) * 550);
   } else {
+
     alert("You can't select more than 4 seats!");
   }
 }
